@@ -1,0 +1,38 @@
+# Sania Khalid - Titanic EDA Portfolio Project
+
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# Simulated Titanic-like dataset
+np.random.seed(42)
+df = pd.DataFrame({
+    "survived": np.random.choice([0, 1], size=200),
+    "pclass": np.random.choice([1, 2, 3], size=200),
+    "sex": np.random.choice(["male", "female"], size=200),
+    "age": np.random.normal(30, 14, size=200).clip(0, 80),
+    "fare": np.random.uniform(10, 100, size=200),
+    "embarked": np.random.choice(["C", "Q", "S"], size=200)
+})
+
+# Plotting
+sns.countplot(x='survived', data=df)
+plt.title('Survival Count')
+plt.show()
+
+sns.countplot(x='pclass', hue='survived', data=df)
+plt.title('Survival by Passenger Class')
+plt.show()
+
+sns.countplot(x='sex', hue='survived', data=df)
+plt.title('Survival by Gender')
+plt.show()
+
+sns.histplot(df['age'], kde=True, bins=30)
+plt.title('Age Distribution')
+plt.show()
+
+sns.heatmap(df.corr(numeric_only=True), annot=True, cmap='coolwarm')
+plt.title('Correlation Heatmap')
+plt.show()
